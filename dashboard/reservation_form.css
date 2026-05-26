@@ -1,0 +1,1285 @@
+/* ===========================================
+   GENERAL LAYOUT OVERRIDES
+   - Hides the sidebar and adjusts content width for full-screen proposal form
+   =========================================== */
+body .sidebar {
+  display: none !important;
+}
+
+body .content {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.proposal-container {
+  margin-left: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* ===========================================
+   BACK-TO-DASHBOARD BUTTON
+   - Styles for the back button with hover effects
+   =========================================== */
+.back-to-dashboard {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.back-to-dashboard:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ===========================================
+   FORM STEPS
+   - Controls visibility of multi-step form sections
+   =========================================== */
+.form-step { 
+  display: none; 
+}
+.form-step.step-active { 
+  display: block; 
+}
+
+/* ===========================================
+   PROGRESS BAR
+   - Enhanced progress bar with steps, circles, and labels
+   =========================================== */
+.progress-container {
+  position: relative;
+  height: 6px;
+  background: #dcdcdc;
+  border-radius: 3px;
+  margin-bottom: 60px;
+}
+.progress-bar {
+  height: 6px;
+  background: linear-gradient(to right, #00b894, #00cec9);
+  width: 0%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(0, 200, 160, 0.4);
+}
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: -13px;
+  width: 100%;
+}
+.step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+.step-circle.active {
+  background: linear-gradient(to right, #00b894, #00cec9);
+  box-shadow: 0 0 10px rgba(0, 200, 160, 0.4);
+}
+.progress-labels {
+  position: absolute;
+  top: 25px;
+  width: 100%;
+}
+
+/* ===========================================
+   PROGRESS VALIDATION STATES
+   - Enhanced step circles with completion indicators
+   =========================================== */
+.step-circle.completed {
+  background: linear-gradient(to right, #28a745, #20c997);
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.4);
+}
+
+/* Hide number and show checkmark only when completed */
+.step-circle.completed .step-number {
+  display: none;
+}
+
+.step-circle.completed .step-check {
+  display: block !important;
+}
+
+/* Ensure step numbers are visible by default */
+.step-circle .step-number {
+  display: block;
+}
+
+.step-circle .step-check {
+  display: none !important;
+}
+
+.step-circle.error {
+  background: #dc3545;
+  box-shadow: 0 0 15px rgba(220, 53, 69, 0.4);
+  animation: pulse-error 0.6s ease-in-out;
+}
+
+.step-check {
+  font-size: 12px;
+}
+
+/* ===========================================
+   VALIDATION ANIMATIONS
+   - Visual feedback for errors and states
+   =========================================== */
+@keyframes pulse-error {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ===========================================
+   FIELD VALIDATION STYLES
+   - Input field states for validation feedback
+   =========================================== */
+.field-error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.field-valid {
+  border-color: #28a745 !important;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+.validation-message {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.validation-message.error {
+  color: #dc3545;
+}
+
+/* ===========================================
+   BUTTON STYLING
+   - General button styles for proposal actions
+   =========================================== */
+.btn-proposal {
+  background: linear-gradient(to right, #00b894, #00cec9);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+.btn-proposal:hover {
+  background: linear-gradient(to right, #00a884, #00b7b7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 180, 130, 0.3);
+}
+
+/* ===========================================
+   FORM ELEMENTS
+   - Styling for inputs, selects, and focus states
+   =========================================== */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #00b894;
+  box-shadow: 0 0 0 0.2rem rgba(0, 184, 148, 0.25);
+}
+
+/* ===========================================
+   VENUE SELECTION GUIDANCE
+   - Visual guidance for the venue selection process
+   =========================================== */
+.venue-section-guide {
+  border-left: 4px solid #00b894;
+  background: #f8fffe;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid #e0f2f1;
+}
+
+.venue-step-guide {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #2d6a4f;
+}
+
+.venue-step-guide:last-child {
+  margin-bottom: 0;
+}
+
+.venue-step-number {
+  background: #00b894;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+/* Enhanced time toggle styling to make it more prominent */
+.time-toggle {
+  background: #f8fffe;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #e0f2f1;
+  margin-top: 10px;
+}
+
+.time-toggle .form-label {
+  color: #2d6a4f;
+  font-size: 1.1rem;
+}
+
+/* Make venue selector more distinct */
+.venue-selector {
+  background: #f8fffe;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #e0f2f1;
+  margin-top: 15px;
+}
+
+/* ===========================================
+   VENUE OPTION STYLING
+   - Card-like options for venues with hover, selected, and image effects
+   =========================================== */
+.venue-option {
+  min-height: 250px;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.venue-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 184, 148, 0) 0%, rgba(0, 184, 148, 0) 100%);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+}
+
+.venue-option:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 184, 148, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #00b894;
+}
+
+.venue-option:hover::before {
+  background: linear-gradient(135deg, rgba(0, 184, 148, 0.03) 0%, rgba(0, 184, 148, 0.08) 100%);
+}
+
+/* Selected State - Highly noticeable with badge and enhanced effects */
+.venue-option.selected {
+  transform: translateY(-4px) scale(1.01);
+  border: 3px solid #00b894;
+  box-shadow: 
+    0 25px 50px rgba(0, 184, 148, 0.25),
+    0 15px 30px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, #f0fff9 0%, #e6fff4 100%);
+}
+
+.venue-option.selected::before {
+  background: linear-gradient(135deg, rgba(0, 184, 148, 0.1) 0%, rgba(0, 184, 148, 0.15) 100%);
+}
+
+.venue-option.selected::after {
+  content: '✓ Selected';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 3;
+  animation: fadeInScale 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.4);
+}
+
+/* Animations - Keyframe for selection badge */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ===========================================
+   MODAL STYLING
+   - Beautiful modal styles for all modal types
+   =========================================== */
+/* Enhanced Close Button Styles */
+.btn-close-custom {
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #dc3545;
+  opacity: 1;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-close-custom::before {
+  content: '×';
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.btn-close-custom:hover {
+  background: #c82333;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-close-custom:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+/* Modal header improvements */
+.modal-header.bg-light {
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f5f4 100%) !important;
+  padding: 25px 30px 15px 30px;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-title.text-success {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Modal body improvements */
+.modal-body.p-4 {
+  padding: 30px !important;
+}
+
+/* Make the modal itself more prominent */
+.modal-content {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* Venue quick info in modal */
+.venue-quick-info {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+}
+
+/* Validation Modal */
+#validationModal .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+}
+
+#validationModal .modal-body {
+  padding: 2.5rem;
+}
+
+#validationModal .w-16 {
+  width: 64px;
+  height: 64px;
+}
+
+/* Navigation Restriction Modal */
+#navigationRestrictionModal .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+}
+
+#navigationRestrictionModal .modal-body {
+  padding: 2.5rem;
+}
+
+#navigationRestrictionModal .w-16 {
+  width: 64px;
+  height: 64px;
+}
+
+/* Confirmation Modal */
+#confirmationModal .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+}
+
+#confirmationModal .modal-body {
+  padding: 2.5rem;
+}
+
+#confirmationModal .w-16 {
+  width: 64px;
+  height: 64px;
+}
+
+#confirmationModal .btn-success {
+  background: linear-gradient(to right, #28a745, #20c997);
+  border: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+#confirmationModal .btn-success:hover {
+  background: linear-gradient(to right, #20c997, #1e9e8a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* ===========================================
+   SUMMARY CARD STYLING
+   - Spacing and borders for summary sections
+   =========================================== */
+.card-body .space-y-3 > div {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.card-body .space-y-3 > div:last-child {
+  border-bottom: none;
+}
+
+/* ===========================================
+   FILE UPLOAD AREA
+   - Drag-and-drop styling with hover, dragover, and selected states
+   =========================================== */
+.file-upload-area {
+  border: 3px dashed #dee2e6;
+  transition: all 0.3s ease;
+  background-color: rgba(248, 249, 250, 0.5);
+}
+
+.file-upload-area:hover {
+  border: 3px dashed #00b894 !important;
+  background-color: rgba(0, 184, 148, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.1);
+}
+
+.file-upload-area.dragover {
+  border: 3px dashed #008f6d !important;
+  background-color: rgba(0, 184, 148, 0.1);
+  transform: scale(1.02);
+}
+
+.file-upload-area.has-file {
+  border: 3px dashed #28a745 !important;
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+/* ===========================================
+   NAVIGATION ACCESSIBILITY INDICATORS
+   - Visual cues for step accessibility
+   =========================================== */
+.step-circle.accessible {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.step-circle.accessible:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.2);
+}
+
+.step-circle.restricted {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ===========================================
+   RESPONSIVE DESIGN
+   - Adjustments for tablets and mobile devices
+   =========================================== */
+@media (max-width: 991px) {
+  .proposal-container {
+    margin-left: 0;
+    padding: 15px;
+  }
+  .progress-labels span {
+    font-size: 0.7rem;
+  }
+  
+  /* Modal responsive adjustments */
+  .modal-body {
+    padding: 1.5rem !important;
+  }
+  
+  .w-16 {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .venue-option .row .col-6 {
+    margin-bottom: 5px;
+  }
+  
+  .value-rates, .package-features {
+    padding: 8px;
+  }
+  
+  /* Progress bar mobile adjustments */
+  .progress-steps {
+    top: -10px;
+  }
+  
+  .step-circle {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  .progress-labels {
+    top: 20px;
+  }
+  
+  .progress-labels span {
+    font-size: 0.65rem;
+  }
+  
+  /* Venue option mobile adjustments */
+  .venue-option .venue-content {
+    padding: 15px !important;
+  }
+  
+  .venue-option .btn-sm {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}
+
+/* ===========================================
+   MISCELLANEOUS
+   - Hides scrollbars across browsers for a cleaner look
+   =========================================== */
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===========================================
+   SMOOTH TRANSITIONS
+   - Enhanced transitions for better user experience
+   =========================================== */
+.step-circle,
+.form-control,
+.form-select,
+.btn-proposal,
+.venue-option,
+.modal-content {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================================
+   FOCUS INDICATORS
+   - Accessibility improvements
+   =========================================== */
+.step-circle:focus-visible {
+  outline: 3px solid #00b894;
+  outline-offset: 2px;
+}
+
+.btn-proposal:focus-visible {
+  outline: 3px solid #00b894;
+  outline-offset: 2px;
+}
+
+/* ===========================================
+   VENUE DETAILS MODAL STYLING
+   =========================================== */
+#venueDetailsModal .modal-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+}
+
+#venueDetailsModal .modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#venueDetailsModal .modal-header {
+    background: linear-gradient(135deg, #f8fffe 0%, #e8f5f4 100%);
+    border-bottom: 2px solid #e0f2f1;
+    padding: 25px 30px 15px 30px;
+    position: relative;
+}
+
+#venueDetailsModal .modal-title {
+    color: #00b894;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+#venueDetailsModal .modal-body {
+    padding: 30px;
+    background: #fff;
+}
+
+#venueDetailsModal .venue-quick-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+
+#venueDetailsModal .venue-quick-info .row {
+    margin: 0 -5px;
+}
+
+#venueDetailsModal .venue-quick-info .col-6 {
+    padding: 0 5px;
+}
+
+#venueDetailsModal .venue-quick-info strong {
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+#venueDetailsModal .venue-quick-info .text-success {
+    color: #00b894 !important;
+    font-size: 1.1rem;
+}
+
+#venueDetailsModal .list-unstyled li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+#venueDetailsModal .list-unstyled li:last-child {
+    border-bottom: none;
+}
+
+#venueDetailsModal .alert-info {
+    background: rgba(0, 184, 148, 0.1);
+    border: 1px solid rgba(0, 184, 148, 0.2);
+    border-radius: 10px;
+    color: #2d6a4f;
+}
+
+/* Enhanced Close Button */
+.btn-close-custom {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: #dc3545;
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    cursor: pointer;
+    z-index: 1055;
+}
+
+.btn-close-custom::before {
+    content: '×';
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: -2px;
+}
+
+.btn-close-custom:hover {
+    background: #c82333;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-close-custom:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-backdrop.show {
+    opacity: 0.6;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    #venueDetailsModal .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    #venueDetailsModal .modal-header {
+        padding: 20px 15px 10px 15px;
+    }
+    
+    #venueDetailsModal .modal-body {
+        padding: 20px 15px;
+    }
+    
+    #venueDetailsModal .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .btn-close-custom {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .btn-close-custom::before {
+        font-size: 20px;
+    }
+}
+
+/* Ensure modal is above everything */
+.modal {
+    z-index: 1060;
+}
+
+.modal-backdrop {
+    z-index: 1050;
+}
+
+
+
+
+/* ===========================================
+   VENUE DETAILS Button STYLING
+   =========================================== */
+/* Venue Details Button Styles */
+.venue-details-btn {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.venue-details-btn:not(:disabled):hover {
+  background-color: #00b894;
+  border-color: #00b894;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 184, 148, 0.3);
+}
+
+.venue-details-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Venue Details Modal Styles */
+#venueDetailsModal .modal-dialog {
+  max-width: 900px;
+}
+
+#venueDetailsModal .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#venueDetailsModal .modal-body {
+  padding: 0;
+  min-height: 500px;
+}
+
+.modal-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+.modal-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 184, 148, 0.1) 0%, rgba(0, 184, 148, 0.3) 100%);
+}
+
+.modal-content-section {
+  padding: 2rem;
+  background: white;
+}
+
+.modal-body-scrollable {
+  overflow-y: auto;
+  max-height: 350px;
+  padding-right: 10px;
+}
+
+.modal-body-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-body-scrollable::-webkit-scrollbar-thumb {
+  background: #00b894;
+  border-radius: 10px;
+}
+
+.modal-body-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #00a884;
+}
+
+.venue-quick-info {
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f5f4 100%) !important;
+  border: 1px solid #e0f2f1;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.features-grid div {
+  padding: 5px 0;
+  color: #6c757d;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.features-grid div:last-child,
+.features-grid div:nth-last-child(2):nth-child(odd) {
+  border-bottom: none;
+}
+
+.btn-close-custom {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-close-custom:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-content-section {
+    padding: 1.5rem;
+  }
+  
+  #venueDetailsModal .modal-dialog {
+    margin: 1rem;
+  }
+}
+
+
+
+/* ===========================================
+   DYNAMIC "OTHER" FIELD STYLING
+   - Smooth transitions and styling for the new dynamic fields
+   =========================================== */
+#otherEventTypeContainer,
+#otherThemeContainer {
+  transition: all 0.3s ease-in-out;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style for the dynamic text inputs */
+#otherEventTypeInput,
+#otherThemeInput {
+  border-left: 3px solid #00b894;
+  padding-left: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+#otherEventTypeInput:focus,
+#otherThemeInput:focus {
+  border-left-color: #008f6d;
+  box-shadow: 0 0 0 0.2rem rgba(0, 184, 148, 0.25);
+}
+
+/* ===========================================
+   UPDATED DATE/TIME INPUT STYLING
+   - Ensure the new arrival date/time inputs are properly styled
+   =========================================== */
+.form-control[type="date"],
+.form-control[type="time"] {
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+}
+
+.form-control[type="date"]:focus,
+.form-control[type="time"]:focus {
+  border-color: #00b894;
+  box-shadow: 0 0 0 0.2rem rgba(0, 184, 148, 0.25);
+}
+
+/* ===========================================
+   SUMMARY SECTION UPDATES
+   - Ensure new summary fields display properly
+   =========================================== */
+#summaryArrivalDate,
+#summaryArrivalTime,
+#reviewArrivalDate,
+#reviewArrivalTime {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0;
+}
+
+/* Truncation for longer custom event types/themes */
+#summaryEventType,
+#summaryTheme,
+#reviewEventType,
+#reviewTheme {
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* ===========================================
+   REVIEW SECTION UPDATES
+   - Adjust spacing for the new field structure
+   =========================================== */
+#step-review .row {
+  margin-bottom: -0.5rem;
+}
+
+#step-review .col-md-6 {
+  margin-bottom: 1rem;
+}
+
+/* ===========================================
+   VALIDATION STYLING FOR NEW FIELDS
+   - Ensure new fields get proper validation styling
+   =========================================== */
+#arrivalDate.field-error,
+#arrivalTime.field-error,
+#otherEventTypeInput.field-error,
+#otherThemeInput.field-error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+#arrivalDate.field-valid,
+#arrivalTime.field-valid,
+#otherEventTypeInput.field-valid,
+#otherThemeInput.field-valid {
+  border-color: #28a745 !important;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+/* ===========================================
+   RESPONSIVE UPDATES FOR NEW LAYOUT
+   - Mobile adjustments for the updated form structure
+   =========================================== */
+@media (max-width: 768px) {
+  /* Ensure proper spacing for the new date/time layout */
+  .row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+  
+  /* Adjust dynamic field containers on mobile */
+  #otherEventTypeContainer,
+  #otherThemeContainer {
+    margin-top: 0.5rem;
+  }
+  
+  /* Summary section mobile adjustments */
+  #summaryArrivalDate,
+  #summaryArrivalTime,
+  #reviewArrivalDate,
+  #reviewArrivalTime {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Further mobile refinements */
+  .form-control[type="date"],
+  .form-control[type="time"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+  
+  /* Dynamic fields on very small screens */
+  #otherEventTypeInput,
+  #otherThemeInput {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.6rem 0.6rem 0.9rem;
+  }
+}
+
+/* ===========================================
+   ENHANCED FOCUS STATES FOR NEW FIELDS
+   - Accessibility improvements
+   =========================================== */
+#arrivalDate:focus-visible,
+#arrivalTime:focus-visible,
+#otherEventTypeInput:focus-visible,
+#otherThemeInput:focus-visible {
+  outline: 3px solid #00b894;
+  outline-offset: 2px;
+}
+
+/* ===========================================
+   SMOOTH TRANSITIONS FOR ALL NEW ELEMENTS
+   =========================================== */
+#otherEventTypeContainer,
+#otherThemeContainer,
+#otherEventTypeInput,
+#otherThemeInput,
+#arrivalDate,
+#arrivalTime {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+
+ @keyframes pulse-venue {
+        0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+    }
+
+    .venue-option {
+        transition: all 0.3s ease;
+    }
+
+    .venue-option.selected {
+        border: 2px solid #198754 !important;
+        box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.1);
+    }
+
+    .venue-selector {
+        transition: all 0.3s ease;
+    }
+    
+    .cost-breakdown-card {
+        border-left: 4px solid #0dcaf0;
+    }
+    
+    .venue-section-guide {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .venue-step-guide {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    
+    .venue-step-guide:last-child {
+        margin-bottom: 0;
+    }
+    
+    .venue-step-number {
+        background: #198754;
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+    
+    .file-upload-area {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .file-upload-area:hover {
+        border-color: #198754 !important;
+        background-color: #f8fff9;
+    }
+    
+    .file-upload-area.has-file {
+        border-color: #198754 !important;
+        background-color: #f0fff4;
+    }
+    
+    .validation-message.error {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 4px;
+    }
+    
+    .field-error {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+    
+    .field-valid {
+        border-color: #198754 !important;
+    }
+
+
+.room-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.room-image {
+    transition: transform 0.3s ease;
+}
+
+.room-card:hover .room-image {
+    transform: scale(1.05);
+}
+
+.modal-room-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+

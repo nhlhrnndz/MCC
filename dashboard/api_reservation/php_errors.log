@@ -1,0 +1,55 @@
+[27-Nov-2025 07:15:10 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:10 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:48 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:48 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:54 Europe/Berlin] PHP Warning:  require_once(../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17
+[27-Nov-2025 07:15:54 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required '../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\MCC\dashboard\api_reservation\payment_screenshot.php on line 17

@@ -1,0 +1,261 @@
+[2025-11-20 11:32:30] Approve Reservation Started
+[2025-11-20 11:32:30] === NEW APPROVE REQUEST ===
+[2025-11-20 11:32:30] Admin ID: 1
+[2025-11-20 11:32:30] Raw input: 
+[2025-11-20 11:32:30] Decoded data: 
+[2025-11-20 11:32:30] Reservation ID: 
+[2025-11-20 11:32:30] Type: 
+[2025-11-20 11:32:30] ERROR: Missing reservation ID
+[2025-11-20 11:33:16] Approve Reservation Started
+[2025-11-20 11:33:16] === NEW APPROVE REQUEST ===
+[2025-11-20 11:33:16] Admin ID: 1
+[2025-11-20 11:33:16] Raw input: {"id":15,"type":"room"}
+[2025-11-20 11:33:16] Decoded data: Array
+(
+    [id] => 15
+    [type] => room
+)
+
+[2025-11-20 11:33:16] Reservation ID: 15
+[2025-11-20 11:33:16] Type: room
+[2025-11-20 11:33:16] Attempting database connection...
+[2025-11-20 11:33:16] DB path: ../../db_connect.php
+[2025-11-20 11:33:16] Database connection successful
+[2025-11-20 11:33:16] Connected to database successfully
+[2025-11-20 11:33:16] Processing room reservation approval
+[2025-11-20 11:33:16] Current reservation status: pending
+[2025-11-20 11:33:16] Executing update query...
+[2025-11-20 11:33:16] Affected rows: 1
+[2025-11-20 11:33:16] SUCCESS: Reservation approved successfully
+[2025-11-20 11:33:16] === REQUEST COMPLETED ===
+
+[2025-11-20 12:29:37] Approve Reservation Started
+[2025-11-20 12:29:37] === NEW APPROVE REQUEST ===
+[2025-11-20 12:29:37] Admin ID: 1
+[2025-11-20 12:29:37] Raw input: {"id":29,"type":"room"}
+[2025-11-20 12:29:37] Decoded data: Array
+(
+    [id] => 29
+    [type] => room
+)
+
+[2025-11-20 12:29:37] Reservation ID: 29
+[2025-11-20 12:29:37] Type: room
+[2025-11-20 12:29:37] Attempting database connection...
+[2025-11-20 12:29:37] DB path: ../../db_connect.php
+[2025-11-20 12:29:37] Database connection successful
+[2025-11-20 12:29:37] Connected to database successfully
+[2025-11-20 12:29:37] Processing room reservation approval
+[2025-11-20 12:29:37] Current reservation status: pending
+[2025-11-20 12:29:37] Executing update query...
+[2025-11-20 12:29:37] Affected rows: 1
+[2025-11-20 12:29:37] SUCCESS: Reservation approved successfully
+[2025-11-20 12:29:37] === REQUEST COMPLETED ===
+
+[2025-11-20 17:46:22] Approve Reservation Started
+[2025-11-20 17:46:22] === NEW APPROVE REQUEST ===
+[2025-11-20 17:46:22] Admin ID: 1
+[2025-11-20 17:46:22] Raw input: {"id":36,"type":"room"}
+[2025-11-20 17:46:22] Decoded data: Array
+(
+    [id] => 36
+    [type] => room
+)
+
+[2025-11-20 17:46:22] Reservation ID: 36
+[2025-11-20 17:46:22] Type: room
+[2025-11-20 17:46:22] Attempting database connection...
+[2025-11-20 17:46:22] DB path: ../../db_connect.php
+[2025-11-20 17:46:22] Database connection successful
+[2025-11-20 17:46:22] Connected to database successfully
+[2025-11-20 17:46:22] Processing room reservation approval
+[2025-11-20 17:46:22] Current reservation status: pending
+[2025-11-20 17:46:22] Executing update query...
+[2025-11-20 17:46:22] Affected rows: 1
+[2025-11-20 17:46:22] SUCCESS: Reservation approved successfully
+[2025-11-20 17:46:22] === REQUEST COMPLETED ===
+
+[2025-11-20 17:46:34] Approve Reservation Started
+[2025-11-20 17:46:34] === NEW APPROVE REQUEST ===
+[2025-11-20 17:46:34] Admin ID: 1
+[2025-11-20 17:46:34] Raw input: {"id":35,"type":"room"}
+[2025-11-20 17:46:34] Decoded data: Array
+(
+    [id] => 35
+    [type] => room
+)
+
+[2025-11-20 17:46:34] Reservation ID: 35
+[2025-11-20 17:46:34] Type: room
+[2025-11-20 17:46:34] Attempting database connection...
+[2025-11-20 17:46:34] DB path: ../../db_connect.php
+[2025-11-20 17:46:34] Database connection successful
+[2025-11-20 17:46:34] Connected to database successfully
+[2025-11-20 17:46:34] Processing room reservation approval
+[2025-11-20 17:46:34] Current reservation status: pending
+[2025-11-20 17:46:34] Executing update query...
+[2025-11-20 17:46:34] Affected rows: 1
+[2025-11-20 17:46:34] SUCCESS: Reservation approved successfully
+[2025-11-20 17:46:34] === REQUEST COMPLETED ===
+
+[2025-11-20 17:46:46] Approve Reservation Started
+[2025-11-20 17:46:46] === NEW APPROVE REQUEST ===
+[2025-11-20 17:46:46] Admin ID: 1
+[2025-11-20 17:46:46] Raw input: {"id":45,"type":"room"}
+[2025-11-20 17:46:46] Decoded data: Array
+(
+    [id] => 45
+    [type] => room
+)
+
+[2025-11-20 17:46:46] Reservation ID: 45
+[2025-11-20 17:46:46] Type: room
+[2025-11-20 17:46:46] Attempting database connection...
+[2025-11-20 17:46:46] DB path: ../../db_connect.php
+[2025-11-20 17:46:46] Database connection successful
+[2025-11-20 17:46:46] Connected to database successfully
+[2025-11-20 17:46:46] Processing room reservation approval
+[2025-11-20 17:46:46] Current reservation status: pending
+[2025-11-20 17:46:46] Executing update query...
+[2025-11-20 17:46:46] Affected rows: 1
+[2025-11-20 17:46:46] SUCCESS: Reservation approved successfully
+[2025-11-20 17:46:46] === REQUEST COMPLETED ===
+
+[2025-11-21 05:06:50] Approve Reservation Started
+[2025-11-21 05:06:50] === NEW APPROVE REQUEST ===
+[2025-11-21 05:06:50] Admin ID: 1
+[2025-11-21 05:06:50] Raw input: {"id":46,"type":"room"}
+[2025-11-21 05:06:50] Decoded data: Array
+(
+    [id] => 46
+    [type] => room
+)
+
+[2025-11-21 05:06:50] Reservation ID: 46
+[2025-11-21 05:06:50] Type: room
+[2025-11-21 05:06:50] Attempting database connection...
+[2025-11-21 05:06:50] DB path: ../../db_connect.php
+[2025-11-21 05:06:50] Database connection successful
+[2025-11-21 05:06:50] Connected to database successfully
+[2025-11-21 05:06:50] Processing room reservation approval
+[2025-11-21 05:06:50] Current reservation status: pending
+[2025-11-21 05:06:50] Executing update query...
+[2025-11-21 05:06:50] Affected rows: 1
+[2025-11-21 05:06:50] SUCCESS: Reservation approved successfully
+[2025-11-21 05:06:50] === REQUEST COMPLETED ===
+
+[2025-11-21 05:16:24] Approve Reservation Started
+[2025-11-21 05:16:24] === NEW APPROVE REQUEST ===
+[2025-11-21 05:16:24] Admin ID: 1
+[2025-11-21 05:16:24] Raw input: {"id":47,"type":"room"}
+[2025-11-21 05:16:24] Decoded data: Array
+(
+    [id] => 47
+    [type] => room
+)
+
+[2025-11-21 05:16:24] Reservation ID: 47
+[2025-11-21 05:16:24] Type: room
+[2025-11-21 05:16:24] Attempting database connection...
+[2025-11-21 05:16:24] DB path: ../../db_connect.php
+[2025-11-21 05:16:24] Database connection successful
+[2025-11-21 05:16:24] Connected to database successfully
+[2025-11-21 05:16:24] Processing room reservation approval
+[2025-11-21 05:16:24] Current reservation status: pending
+[2025-11-21 05:16:24] Executing update query...
+[2025-11-21 05:16:24] Affected rows: 1
+[2025-11-21 05:16:24] SUCCESS: Reservation approved successfully
+[2025-11-21 05:16:24] === REQUEST COMPLETED ===
+
+[2025-11-21 10:32:07] Approve Reservation Started
+[2025-11-21 10:32:07] === NEW APPROVE REQUEST ===
+[2025-11-21 10:32:07] Admin ID: 1
+[2025-11-21 10:32:07] Raw input: {"id":56,"type":"room"}
+[2025-11-21 10:32:07] Decoded data: Array
+(
+    [id] => 56
+    [type] => room
+)
+
+[2025-11-21 10:32:07] Reservation ID: 56
+[2025-11-21 10:32:07] Type: room
+[2025-11-21 10:32:07] Attempting database connection...
+[2025-11-21 10:32:07] DB path: ../../db_connect.php
+[2025-11-21 10:32:08] Database connection successful
+[2025-11-21 10:32:08] Connected to database successfully
+[2025-11-21 10:32:08] Processing room reservation approval
+[2025-11-21 10:32:08] Current reservation status: pending
+[2025-11-21 10:32:08] Executing update query...
+[2025-11-21 10:32:08] Affected rows: 1
+[2025-11-21 10:32:08] SUCCESS: Reservation approved successfully
+[2025-11-21 10:32:08] === REQUEST COMPLETED ===
+
+[2025-11-21 10:54:48] Approve Reservation Started
+[2025-11-21 10:54:48] === NEW APPROVE REQUEST ===
+[2025-11-21 10:54:48] Admin ID: 1
+[2025-11-21 10:54:48] Raw input: {"id":57,"type":"room"}
+[2025-11-21 10:54:48] Decoded data: Array
+(
+    [id] => 57
+    [type] => room
+)
+
+[2025-11-21 10:54:48] Reservation ID: 57
+[2025-11-21 10:54:48] Type: room
+[2025-11-21 10:54:48] Attempting database connection...
+[2025-11-21 10:54:48] DB path: ../../db_connect.php
+[2025-11-21 10:54:48] Database connection successful
+[2025-11-21 10:54:48] Connected to database successfully
+[2025-11-21 10:54:48] Processing room reservation approval
+[2025-11-21 10:54:48] Current reservation status: pending
+[2025-11-21 10:54:48] Executing update query...
+[2025-11-21 10:54:48] Affected rows: 1
+[2025-11-21 10:54:48] SUCCESS: Reservation approved successfully
+[2025-11-21 10:54:48] === REQUEST COMPLETED ===
+
+[2025-11-21 15:46:08] Approve Reservation Started
+[2025-11-21 15:46:08] === NEW APPROVE REQUEST ===
+[2025-11-21 15:46:08] Admin ID: 1
+[2025-11-21 15:46:08] Raw input: {"id":76,"type":"room"}
+[2025-11-21 15:46:08] Decoded data: Array
+(
+    [id] => 76
+    [type] => room
+)
+
+[2025-11-21 15:46:08] Reservation ID: 76
+[2025-11-21 15:46:08] Type: room
+[2025-11-21 15:46:08] Attempting database connection...
+[2025-11-21 15:46:08] DB path: ../../db_connect.php
+[2025-11-21 15:46:08] Database connection successful
+[2025-11-21 15:46:08] Connected to database successfully
+[2025-11-21 15:46:08] Processing room reservation approval
+[2025-11-21 15:46:08] Current reservation status: pending
+[2025-11-21 15:46:08] Executing update query...
+[2025-11-21 15:46:08] Affected rows: 1
+[2025-11-21 15:46:08] SUCCESS: Reservation approved successfully
+[2025-11-21 15:46:08] === REQUEST COMPLETED ===
+
+[2025-11-21 15:49:22] Approve Reservation Started
+[2025-11-21 15:49:22] === NEW APPROVE REQUEST ===
+[2025-11-21 15:49:22] Admin ID: 1
+[2025-11-21 15:49:22] Raw input: {"id":77,"type":"room"}
+[2025-11-21 15:49:22] Decoded data: Array
+(
+    [id] => 77
+    [type] => room
+)
+
+[2025-11-21 15:49:22] Reservation ID: 77
+[2025-11-21 15:49:22] Type: room
+[2025-11-21 15:49:22] Attempting database connection...
+[2025-11-21 15:49:22] DB path: ../../db_connect.php
+[2025-11-21 15:49:22] Database connection successful
+[2025-11-21 15:49:22] Connected to database successfully
+[2025-11-21 15:49:22] Processing room reservation approval
+[2025-11-21 15:49:22] Current reservation status: pending
+[2025-11-21 15:49:22] Executing update query...
+[2025-11-21 15:49:22] Affected rows: 1
+[2025-11-21 15:49:22] SUCCESS: Reservation approved successfully
+[2025-11-21 15:49:22] === REQUEST COMPLETED ===
+

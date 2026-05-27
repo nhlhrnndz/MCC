@@ -1,5 +1,4 @@
 <?php
-// dashboard/maintenance_api/get_user_issues.php
 session_start();
 header('Content-Type: application/json');
 
@@ -32,6 +31,7 @@ if ($requested_user && $requested_user != $user_id) {
 }
 
 if ($issue_id) {
+    // Get issue details
     $issueStmt = $conn->prepare("
         SELECT mi.*, au.username as assigned_name
         FROM maintenance_issues mi
@@ -47,30 +47,55 @@ if ($issue_id) {
         exit;
     }
     
+    // Get notes - FIXED: removed author_type since it doesn't exist
     $notesStmt = $conn->prepare("
-        SELECT mn.*,
-            CASE 
-                WHEN mn.author_type = 'user' THEN u.full_name
-                WHEN mn.author_type = 'admin' THEN au.username
-                ELSE 'System'
-            END as author_name
+        SELECT mn.*, u.full_name as author_name
         FROM maintenance_notes mn
-        LEFT JOIN users u ON mn.author_id = u.id AND mn.author_type = 'user'
-        LEFT JOIN admin_users au ON mn.author_id = au.id AND mn.author_type IN ('admin', 'manager')
+        LEFT JOIN users u ON mn.author_id = u.id
         WHERE mn.issue_id = ?
         ORDER BY mn.created_at ASC
     ");
     $notesStmt->bind_param("i", $issue_id);
     $notesStmt->execute();
-    $issue['notes'] = $notesStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $notes = $notesStmt->get_result()->fetch_all(MYSQLI_ASSOC);
     
+    // Add author_type for frontend compatibility (default to 'user')
+    foreach ($notes as &$note) {
+        $note['author_type'] = 'user';
+        if (!$note['author_name']) {
+            $note['author_name'] = 'System';
+        }
+    }
+    
+    // Check if facility is currently flagged (unavailable)
+    $flagStmt = $conn->prepare("
+        SELECT * FROM maintenance_facility_flags 
+        WHERE facility_id = ? AND issue_id = ? AND unflagged_at IS NULL
+    ");
+    $flagStmt->bind_param("ii", $issue['facility_id'], $issue_id);
+    $flagStmt->execute();
+    $isFlagged = $flagStmt->get_result()->num_rows > 0;
+    
+    $issue['is_facility_unavailable'] = $isFlagged;
+    $issue['notes'] = $notes;
     echo json_encode($issue);
 } else {
     $issuesStmt = $conn->prepare("
-        SELECT id, facility_name, title, severity, status, created_at, resolved_at
-        FROM maintenance_issues
-        WHERE reported_by = ?
-        ORDER BY created_at DESC
+        SELECT 
+            mi.id, 
+            mi.facility_name, 
+            mi.title, 
+            mi.severity, 
+            mi.status, 
+            mi.created_at, 
+            mi.resolved_at,
+            (SELECT COUNT(*) FROM maintenance_facility_flags mff 
+             WHERE mff.facility_id = mi.facility_id 
+             AND mff.issue_id = mi.id 
+             AND mff.unflagged_at IS NULL) as is_facility_unavailable
+        FROM maintenance_issues mi
+        WHERE mi.reported_by = ?
+        ORDER BY mi.created_at DESC
     ");
     $issuesStmt->bind_param("i", $user_id);
     $issuesStmt->execute();

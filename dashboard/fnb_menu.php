@@ -1,10 +1,4 @@
 <?php
-// Add debug logging
-//MCC\dashboard\fnb_menu.php
-error_log("fnb_menu.php loaded");
-error_log("Session user_id: " . ($_SESSION['user_id'] ?? 'not set'));
-?>
-<?php
 // This file is loaded by user_dashboard.php?page=fnb_menu
 require_once __DIR__ . '/../db_connect.php';
 
@@ -17,20 +11,15 @@ $username = $_SESSION['username'] ?? 'Guest';
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="text-success">Food & Beverage Menu</h2>
-<a href="?page=fnb_my_orders" class="btn btn-outline-success">
-    <i class="fas fa-history me-2"></i>View My Orders
-</a>
+                <a href="?page=fnb_my_orders" class="btn btn-outline-success">
+                    <i class="fas fa-history me-2"></i>View My Orders
+                </a>
             </div>
         </div>
     </div>
 
     <div class="row" id="menuContainer">
-        <div class="col-12 text-center py-5">
-            <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading menu...</span>
-            </div>
-            <p class="mt-2 text-muted">Loading delicious options...</p>
-        </div>
+        <!-- Menu will be loaded here -->
     </div>
 </div>
 
@@ -67,60 +56,159 @@ $username = $_SESSION['username'] ?? 'Guest';
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 let currentItem = null;
 const userId = <?php echo $user_id; ?>;
 
+// ============================================
+// HARDCODED MENU DATA - Using relative paths from project root
+// ============================================
+const menuData = [
+    {
+        id: 1,
+        name: "Grilled Chicken",
+        description: "Grilled chicken breast with vegetables, served with rice and gravy.",
+        price: 250.00,
+        category: "Main Course",
+        image: "../upload/grilled_chicken.jpg",
+        is_available: true
+    },
+    {
+        id: 2,
+        name: "Caesar Salad",
+        description: "Fresh romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
+        price: 150.00,
+        category: "Appetizer",
+        image: "../upload/caesar_salad.jpg",
+        is_available: true
+    },
+    {
+        id: 3,
+        name: "Chocolate Cake",
+        description: "Rich chocolate cake with creamy chocolate frosting.",
+        price: 120.00,
+        category: "Dessert",
+        image: "../upload/chocolate_cake.jpg",
+        is_available: true
+    },
+    {
+        id: 4,
+        name: "Iced Tea",
+        description: "Freshly brewed iced tea with lemon.",
+        price: 40.00,
+        category: "Beverage",
+        image: "../upload/iced_tea.jpg",
+        is_available: true
+    },
+    {
+        id: 5,
+        name: "Club Sandwich",
+        description: "Triple-decker sandwich with ham, turkey, bacon, lettuce, and tomato.",
+        price: 180.00,
+        category: "Snack",
+        image: "../upload/club_sandwich.jpg",
+        is_available: true
+    },
+    {
+        id: 6,
+        name: "Bulalo Sa MCC",
+        description: "Hot beef bulalo soup with vegetables, corn, and bone marrow.",
+        price: 380.00,
+        category: "Specialty",
+        image: "../upload/bulalo.jpg",
+        is_available: true
+    },
+    {
+        id: 7,
+        name: "Sinigang na Hipon",
+        description: "Shrimp sour soup with vegetables, cooked in tamarind broth.",
+        price: 300.00,
+        category: "Main Course",
+        image: "../upload/sinigang_hipon.jpg",
+        is_available: true
+    },
+    {
+        id: 8,
+        name: "Crispy Pata",
+        description: "Deep fried crispy pork leg served with special sauce.",
+        price: 400.00,
+        category: "Main Course",
+        image: "../upload/crispy_pata.jpg",
+        is_available: true
+    },
+    {
+        id: 9,
+        name: "Lechon Kawali",
+        description: "Crispy pork belly slices served with lechon sauce.",
+        price: 150.00,
+        category: "Main Course",
+        image: "../upload/lechon_kawali.jpg",
+        is_available: true
+    },
+    {
+        id: 10,
+        name: "Chopsuey",
+        description: "Mixed vegetables stir fry with chicken and shrimp.",
+        price: 170.00,
+        category: "Main Course",
+        image: "../upload/chopsuey.jpg",
+        is_available: true
+    },
+    {
+        id: 11,
+        name: "Pork Barbeque",
+        description: "Grilled pork barbeque skewers marinated in special sauce.",
+        price: 35.00,
+        category: "Main Course",
+        image: "../upload/pork_barbeque.jpg",
+        is_available: true
+    }
+];
+
 function loadMenu() {
-    $.ajax({
-        url: 'fnb_api/get_menu_items.php',
-        type: 'GET',
-        success: function(response) {
-            if (response.success) {
-                displayMenu(response.data);
-            } else {
-                $('#menuContainer').html('<div class="col-12 text-center text-danger">Failed to load menu: ' + (response.message || 'Unknown error') + '</div>');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', error);
-            $('#menuContainer').html('<div class="col-12 text-center text-danger">Error loading menu. Please refresh and try again.</div>');
-        }
-    });
+    displayMenu(menuData);
 }
 
 function displayMenu(items) {
     const container = $('#menuContainer');
     container.empty();
-    
+
     if (!items || items.length === 0) {
-        container.html('<div class="col-12 text-center"><i class="fas fa-utensils fa-3x text-muted mb-3"></i><h5>No menu items available</h5><p class="text-muted">Check back later for delicious options!</p></div>');
+        container.html(`
+            <div class="col-12 text-center">
+                <h5>No menu items available</h5>
+            </div>
+        `);
         return;
     }
 
-    const availableItems = items.filter(item => item.is_available == 1);
-    
-    if (availableItems.length === 0) {
-        container.html('<div class="col-12 text-center"><i class="fas fa-ban fa-3x text-muted mb-3"></i><h5>No items available</h5><p class="text-muted">Menu is currently unavailable</p></div>');
-        return;
-    }
+    const availableItems = items.filter(item => item.is_available == true);
 
     availableItems.forEach(item => {
+        // Build the correct image URL
+        let imageUrl = item.image;
+        
+        // Log to console for debugging
+        console.log("Item:", item.name, "Image URL:", imageUrl);
+
         const card = `
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm" style="border-radius: 12px; transition: transform 0.2s;">
-                    ${item.image ? `<img src="${item.image}" class="card-img-top" style="height: 200px; object-fit: cover; border-radius: 12px 12px 0 0;" alt="${item.name}">` : 
-                                   `<div class="bg-light text-center py-5" style="height: 200px;">
-                                        <i class="fas fa-utensils fa-3x text-muted mt-5"></i>
-                                    </div>`}
-                    <div class="card-body">
+                <div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                    <img
+                        src="${imageUrl}"
+                        class="card-img-top"
+                        style="height: 220px; width: 100%; object-fit: cover;"
+                        alt="${escapeHtml(item.name)}"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect width=%22300%22 height=%22200%22 fill=%22%23e9ecef%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%236c757d%22 font-size=%2216%22%3E🍽️ ${escapeHtml(item.name)}%3C/text%3E%3C/svg%3E'; this.style.objectFit='contain';"
+                    >
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-success fw-bold">${escapeHtml(item.name)}</h5>
-                        <p class="card-text text-muted small">${escapeHtml(item.description.substring(0, 100))}${item.description.length > 100 ? '...' : ''}</p>
-                        <p class="card-text">
-                            <span class="badge bg-info">${escapeHtml(item.category)}</span>
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="h5 text-success fw-bold mb-0">₱${parseFloat(item.price).toFixed(2)}</span>
+                        <p class="card-text text-muted small">${escapeHtml(item.description || '')}</p>
+                        <p><span class="badge bg-info">${escapeHtml(item.category)}</span></p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="h5 text-success fw-bold mb-0">₱${item.price.toFixed(2)}</span>
                             <button class="btn btn-success btn-sm" onclick='showOrderModal(${JSON.stringify(item)})'>
                                 <i class="fas fa-shopping-cart me-1"></i>Order
                             </button>
@@ -146,19 +234,25 @@ function escapeHtml(text) {
 function showOrderModal(item) {
     currentItem = item;
     $('#menuItemId').val(item.id);
+
+    let imageUrl = item.image;
+
     $('#orderItemDetails').html(`
         <div class="text-center mb-3">
-            ${item.image ? `<img src="${item.image}" class="img-fluid rounded mb-2" style="max-height: 150px;">` : ''}
+            <img
+                src="${imageUrl}"
+                class="img-fluid rounded mb-2"
+                style="max-height: 150px; object-fit: cover;"
+                onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect width=%22150%22 height=%22150%22 fill=%22%23e9ecef%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%236c757d%22 font-size=%2214%22%3E🍽️%3C/text%3E%3C/svg%3E';"
+            >
             <h5>${escapeHtml(item.name)}</h5>
             <p class="text-muted small">${escapeHtml(item.description)}</p>
-            <p class="fw-bold">Price: ₱${parseFloat(item.price).toFixed(2)}</p>
+            <p class="fw-bold">Price: ₱${item.price.toFixed(2)}</p>
         </div>
     `);
-    updateTotalPrice();
-    
+
     $('#quantity').val(1);
     updateTotalPrice();
-    
     new bootstrap.Modal(document.getElementById('orderModal')).show();
 }
 
@@ -174,6 +268,7 @@ function updateTotalPrice() {
 
 function placeOrder() {
     const quantity = parseInt($('#quantity').val());
+
     if (quantity < 1) {
         alert('Please enter a valid quantity');
         return;
@@ -190,13 +285,11 @@ function placeOrder() {
         success: function(response) {
             if (response.success) {
                 bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
-                
                 if (typeof Toast !== 'undefined') {
                     Toast.show('Order placed successfully! Your food is being prepared.', 'success');
                 } else {
                     alert('Order placed successfully!');
                 }
-                
                 $('#quantity').val(1);
             } else {
                 if (typeof Toast !== 'undefined') {
@@ -208,11 +301,7 @@ function placeOrder() {
         },
         error: function(xhr, status, error) {
             console.error('Place order error:', error);
-            if (typeof Toast !== 'undefined') {
-                Toast.show('Error placing order. Please try again.', 'error');
-            } else {
-                alert('Error placing order');
-            }
+            alert('Error placing order');
         }
     });
 }

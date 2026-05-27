@@ -33,7 +33,6 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Sidebar Styles - Matching Admin Dashboard */
         .sidebar {
             width: 260px;
             height: 100vh;
@@ -141,14 +140,12 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             transform: translateX(8px);
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 260px;
             padding: 20px;
             min-height: 100vh;
         }
 
-        /* Beautiful Header Banner */
         .dashboard-banner {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -182,7 +179,6 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             pointer-events: none;
         }
 
-        /* Card Styles */
         .card {
             border: none;
             border-radius: 12px;
@@ -221,6 +217,13 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
         .status-delivered { background-color: #6c757d; color: #fff; }
         .status-cancelled { background-color: #dc3545; color: #fff; }
 
+        .menu-card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background-color: #f8f9fa;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 80px;
@@ -254,7 +257,6 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
 </head>
 <body>
     <div class="d-flex">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
                 <h5>F&B Manager</h5>
@@ -271,8 +273,6 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                     <i class="fas fa-shopping-cart"></i>
                     <span>Order Management</span>
                 </a>
-
-
             </nav>
 
             <div class="logout-btn">
@@ -283,11 +283,8 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content flex-grow-1">
             <div class="container-fluid">
-
-                <!-- Beautiful Banner -->
                 <div class="dashboard-banner position-relative">
                     <div>
                         <h1>F&B Management Dashboard</h1>
@@ -296,7 +293,6 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                     <i class="fas fa-utensils banner-icon"></i>
                 </div>
 
-                <!-- Menu Management Section -->
                 <div id="menuSection">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-primary">Menu Items</h3>
@@ -305,16 +301,10 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                         </button>
                     </div>
                     <div id="menuItemsList" class="row">
-                        <div class="col-12 text-center py-5">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <p class="mt-2 text-muted">Loading menu items...</p>
-                        </div>
+                        <!-- Menu will be loaded here -->
                     </div>
                 </div>
 
-                <!-- Orders Management Section -->
                 <div id="ordersSection" style="display: none;">
                     <h3 class="text-primary mb-4">All Orders</h3>
                     <div class="table-responsive">
@@ -368,7 +358,7 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label fw-bold">Price (RM)</label>
+                            <label for="price" class="form-label fw-bold">Price (PHP)</label>
                             <input type="number" step="0.01" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="mb-3">
@@ -384,7 +374,8 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label fw-bold">Image URL</label>
-                            <input type="text" class="form-control" id="image" name="image" placeholder="https://example.com/image.jpg">
+                            <input type="text" class="form-control" id="image" name="image" placeholder="../upload/filename.jpg">
+                            <div class="form-text">Use format: ../upload/your-image.jpg (e.g., ../upload/bulalo.jpg)</div>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_available" name="is_available" value="1" checked>
@@ -423,45 +414,122 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
     <script>
         let currentSection = 'menu';
 
-        // Update active state on sidebar links
-        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
+        // ============================================
+        // HARDCODED MENU DATA - Same paths as user menu
+        // ============================================
+       let menuData = [
+    {
+        id: 1,
+        name: "Grilled Chicken",
+        description: "Grilled chicken breast with vegetables, served with rice and gravy.",
+        price: 250.00,
+        category: "Main Course",
+        image: "../../upload/grilled_chicken.jpg",
+        is_available: 1
+    },
+    {
+        id: 2,
+        name: "Caesar Salad",
+        description: "Fresh romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
+        price: 150.00,
+        category: "Appetizer",
+        image: "../../upload/caesar_salad.jpg",
+        is_available: 1
+    },
+    {
+        id: 3,
+        name: "Chocolate Cake",
+        description: "Rich chocolate cake with creamy chocolate frosting.",
+        price: 120.00,
+        category: "Dessert",
+        image: "../../upload/chocolate_cake.jpg",
+        is_available: 1
+    },
+    {
+        id: 4,
+        name: "Iced Tea",
+        description: "Freshly brewed iced tea with lemon.",
+        price: 40.00,
+        category: "Beverage",
+        image: "../../upload/iced_tea.jpg",
+        is_available: 1
+    },
+    {
+        id: 5,
+        name: "Club Sandwich",
+        description: "Triple-decker sandwich with ham, turkey, bacon, lettuce, and tomato.",
+        price: 180.00,
+        category: "Snack",
+        image: "../../upload/club_sandwich.jpg",
+        is_available: 1
+    },
+    {
+        id: 6,
+        name: "Bulalo Sa MCC",
+        description: "Hot beef bulalo soup with vegetables, corn, and bone marrow.",
+        price: 380.00,
+        category: "Specialty",
+        image: "../../upload/bulalo.jpg",
+        is_available: 1
+    },
+    {
+        id: 7,
+        name: "Sinigang na Hipon",
+        description: "Shrimp sour soup with vegetables, cooked in tamarind broth.",
+        price: 300.00,
+        category: "Main Course",
+        image: "../../upload/sinigang_hipon.jpg",
+        is_available: 1
+    },
+    {
+        id: 8,
+        name: "Crispy Pata",
+        description: "Deep fried crispy pork leg served with special sauce.",
+        price: 400.00,
+        category: "Main Course",
+        image: "../../upload/crispy_pata.jpg",
+        is_available: 1
+    },
+    {
+        id: 9,
+        name: "Lechon Kawali",
+        description: "Crispy pork belly slices served with lechon sauce.",
+        price: 150.00,
+        category: "Main Course",
+        image: "../../upload/lechon_kawali.jpg",
+        is_available: 1
+    },
+    {
+        id: 10,
+        name: "Chopsuey",
+        description: "Mixed vegetables stir fry with chicken and shrimp.",
+        price: 170.00,
+        category: "Main Course",
+        image: "../../upload/chopsuey.jpg",
+        is_available: 1
+    },
+    {
+        id: 11,
+        name: "Pork Barbeque",
+        description: "Grilled pork barbeque skewers marinated in special sauce.",
+        price: 35.00,
+        category: "Main Course",
+        image: "../../upload/pork_barbeque.jpg",
+        is_available: 1
+    }
+];
 
         function showSection(section) {
             currentSection = section;
             if (section === 'menu') {
                 document.getElementById('menuSection').style.display = 'block';
                 document.getElementById('ordersSection').style.display = 'none';
-                loadMenuItems();
+                displayMenuItems(menuData);
             } else {
                 document.getElementById('menuSection').style.display = 'none';
                 document.getElementById('ordersSection').style.display = 'block';
                 loadOrders();
             }
-        }
-
-        function loadMenuItems() {
-            $('#menuItemsList').html('<div class="col-12 text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2 text-muted">Loading menu items...</p></div>');
-            
-            $.ajax({
-                url: '../api/fnb/get_menu_items.php',
-                type: 'GET',
-                success: function(response) {
-                    if (response.success) {
-                        displayMenuItems(response.data);
-                    } else {
-                        $('#menuItemsList').html('<div class="col-12 text-center text-danger py-5">Failed to load menu: ' + (response.message || 'Unknown error') + '</div>');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', error);
-                    $('#menuItemsList').html('<div class="col-12 text-center text-danger py-5">Error loading menu. Please refresh and try again.</div>');
-                }
-            });
         }
 
         function displayMenuItems(items) {
@@ -474,11 +542,11 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             container.innerHTML = items.map(item => `
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        ${item.image ? `<img src="${item.image}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="${item.name}">` : '<div class="card-img-top bg-light text-center py-5"><i class="fas fa-utensils fa-3x text-muted"></i></div>'}
+                        <img src="${item.image}" class="card-img-top menu-card-img" alt="${escapeHtml(item.name)}" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect width=%22300%22 height=%22200%22 fill=%22%23e9ecef%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%236c757d%22%3E🍽️ ${escapeHtml(item.name)}%3C/text%3E%3C/svg%3E';">
                         <div class="card-body">
                             <h5 class="card-title text-primary fw-bold">${escapeHtml(item.name)}</h5>
-                            <p class="card-text text-muted small">${escapeHtml(item.description.substring(0, 100))}${item.description.length > 100 ? '...' : ''}</p>
-                            <p class="card-text"><strong>Price:</strong> <span class="text-primary fw-bold">RM ${parseFloat(item.price).toFixed(2)}</span></p>
+                            <p class="card-text text-muted small">${escapeHtml((item.description || '').substring(0, 100))}${(item.description || '').length > 100 ? '...' : ''}</p>
+                            <p class="card-text"><strong>Price:</strong> <span class="text-primary fw-bold">₱${parseFloat(item.price).toFixed(2)}</span></p>
                             <p class="card-text"><strong>Category:</strong> ${escapeHtml(item.category)}</p>
                             <p class="card-text">
                                 <span class="badge ${item.is_available == 1 ? 'bg-success' : 'bg-danger'}">
@@ -486,10 +554,10 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                                 </span>
                             </p>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-warning btn-sm flex-grow-1" onclick="editMenuItem(${item.id})">
+                                <button class="btn btn-warning btn-sm flex-grow-1" onclick='editMenuItem(${JSON.stringify(item)})'>
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
-                                <button class="btn btn-danger btn-sm flex-grow-1" onclick="deleteMenuItem(${item.id})">
+                                <button class="btn btn-danger btn-sm flex-grow-1" onclick='deleteMenuItem(${item.id})'>
                                     <i class="fas fa-trash"></i> Delete
                                 </button>
                             </div>
@@ -514,71 +582,75 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             document.getElementById('menuForm').reset();
             document.getElementById('menuId').value = '';
             document.getElementById('is_available').checked = true;
+            document.getElementById('image').value = '../upload/';
             new bootstrap.Modal(document.getElementById('menuModal')).show();
         }
 
-        function editMenuItem(id) {
-            $.ajax({
-                url: '../api/fnb/get_menu_items.php?id=' + id,
-                type: 'GET',
-                success: function(response) {
-                    if (response.success && response.data) {
-                        const item = response.data;
-                        document.getElementById('menuModalTitle').innerHTML = '<i class="fas fa-edit me-2"></i>Edit Menu Item';
-                        document.getElementById('menuId').value = item.id;
-                        document.getElementById('name').value = item.name;
-                        document.getElementById('description').value = item.description;
-                        document.getElementById('price').value = item.price;
-                        document.getElementById('category').value = item.category;
-                        document.getElementById('image').value = item.image || '';
-                        document.getElementById('is_available').checked = item.is_available == 1;
-                        new bootstrap.Modal(document.getElementById('menuModal')).show();
-                    }
-                }
-            });
+        function editMenuItem(item) {
+            document.getElementById('menuModalTitle').innerHTML = '<i class="fas fa-edit me-2"></i>Edit Menu Item';
+            document.getElementById('menuId').value = item.id;
+            document.getElementById('name').value = item.name;
+            document.getElementById('description').value = item.description;
+            document.getElementById('price').value = item.price;
+            document.getElementById('category').value = item.category;
+            document.getElementById('image').value = item.image || '';
+            document.getElementById('is_available').checked = item.is_available == 1;
+            new bootstrap.Modal(document.getElementById('menuModal')).show();
         }
 
         function saveMenuItem() {
-            const formData = new FormData(document.getElementById('menuForm'));
             const id = document.getElementById('menuId').value;
-            const url = id ? '../api/fnb/update_menu_item.php' : '../api/fnb/add_menu_item.php';
-            
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.success) {
-                        bootstrap.Modal.getInstance(document.getElementById('menuModal')).hide();
-                        loadMenuItems();
-                        alert(response.message);
-                    } else {
-                        alert('Error: ' + response.message);
-                    }
-                },
-                error: function() {
-                    alert('Error saving menu item');
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const price = parseFloat(document.getElementById('price').value);
+            const category = document.getElementById('category').value;
+            let image = document.getElementById('image').value;
+            const is_available = document.getElementById('is_available').checked ? 1 : 0;
+
+            if (!name || !description || !price || !category) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Ensure image path is correct
+            if (image && !image.startsWith('../upload/') && !image.startsWith('http')) {
+                image = '../upload/' + image;
+            }
+
+            if (id) {
+                // Update existing item
+                const index = menuData.findIndex(item => item.id == id);
+                if (index !== -1) {
+                    menuData[index] = { ...menuData[index], name, description, price, category, image, is_available };
+                    alert('Menu item updated successfully!');
                 }
-            });
+            } else {
+                // Add new item
+                const newId = Math.max(...menuData.map(item => item.id), 0) + 1;
+                menuData.push({
+                    id: newId,
+                    name,
+                    description,
+                    price,
+                    category,
+                    image: image || '../upload/placeholder.jpg',
+                    is_available
+                });
+                alert('Menu item added successfully!');
+            }
+
+            bootstrap.Modal.getInstance(document.getElementById('menuModal')).hide();
+            displayMenuItems(menuData);
         }
 
         function deleteMenuItem(id) {
             if (confirm('Are you sure you want to delete this item?')) {
-                $.ajax({
-                    url: '../api/fnb/delete_menu_item.php',
-                    type: 'POST',
-                    data: { id: id },
-                    success: function(response) {
-                        if (response.success) {
-                            loadMenuItems();
-                            alert(response.message);
-                        } else {
-                            alert('Error: ' + response.message);
-                        }
-                    }
-                });
+                const index = menuData.findIndex(item => item.id == id);
+                if (index !== -1) {
+                    menuData.splice(index, 1);
+                    displayMenuItems(menuData);
+                    alert('Menu item deleted successfully!');
+                }
             }
         }
 
@@ -594,6 +666,9 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                     } else {
                         $('#ordersList').html('<tr><td colspan="6" class="text-center text-danger py-5">Failed to load orders</td></tr>');
                     }
+                },
+                error: function() {
+                    $('#ordersList').html('<tr><td colspan="6" class="text-center text-danger py-5">Error loading orders</td></tr>');
                 }
             });
         }
@@ -609,9 +684,9 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                 <tr>
                     <td><span class="fw-bold">#${order.id}</span></td>
                     <td>${order.user_id}</td>
-                    <td class="fw-bold text-primary">RM ${parseFloat(order.total_amount).toFixed(2)}</td>
+                    <td class="fw-bold text-primary">₱${parseFloat(order.total_amount).toFixed(2)}</td>
                     <td>
-                        <select class="form-select form-select-sm status-select" data-order-id="${order.id}" onchange="updateOrderStatus(${order.id}, this.value)" style="width: auto;">
+                        <select class="form-select form-select-sm" onchange="updateOrderStatus(${order.id}, this.value)" style="width: auto;">
                             <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
                             <option value="received" ${order.status === 'received' ? 'selected' : ''}>Received</option>
                             <option value="preparing" ${order.status === 'preparing' ? 'selected' : ''}>Preparing</option>
@@ -625,8 +700,8 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                         <button class="btn btn-primary btn-sm" onclick="viewOrderDetails(${order.id})">
                             <i class="fas fa-eye"></i> View
                         </button>
-                     </td>
-                 </tr>
+                    </td>
+                </tr>
             `).join('');
         }
 
@@ -638,9 +713,9 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                 success: function(response) {
                     if (response.success) {
                         alert('Order status updated successfully');
+                        loadOrders();
                     } else {
                         alert('Error: ' + response.message);
-                        loadOrders();
                     }
                 }
             });
@@ -658,7 +733,7 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                         if (order.items && order.items.length > 0) {
                             itemsHtml = `
                                 <table class="table table-bordered">
-                                    <thead class="table" style="background-color: var(--primary); color: white;">
+                                    <thead style="background-color: var(--primary); color: white;">
                                         <tr>
                                             <th>Item Name</th>
                                             <th>Quantity</th>
@@ -671,13 +746,13 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
                                             <tr>
                                                 <td>${escapeHtml(item.name)}</td>
                                                 <td>${item.quantity}</td>
-                                                <td>RM ${parseFloat(item.unit_price).toFixed(2)}</td>
-                                                <td>RM ${(item.quantity * item.unit_price).toFixed(2)}</td>
+                                                <td>₱${parseFloat(item.unit_price).toFixed(2)}</td>
+                                                <td>₱${(item.quantity * item.unit_price).toFixed(2)}</td>
                                             </tr>
                                         `).join('')}
                                         <tr class="table-light fw-bold">
                                             <td colspan="3" class="text-end">Total:</td>
-                                            <td class="text-primary">RM ${parseFloat(order.total_amount).toFixed(2)}</td>
+                                            <td class="text-primary">₱${parseFloat(order.total_amount).toFixed(2)}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -713,8 +788,8 @@ $admin_name = $_SESSION['fullname'] ?? $_SESSION['username'] ?? 'F&B Manager';
             });
         }
 
-        // Load initial menu items
-        loadMenuItems();
+        // Initialize - display menu items
+        displayMenuItems(menuData);
     </script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <?php
-session_start();
+//MCC\dashboard\fnb_api\get_user_orders.php
 header('Content-Type: application/json');
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once __DIR__ . '/../../db_connect.php';
 
@@ -11,7 +15,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Get specific order if ID is provided
 if (isset($_GET['order_id'])) {
     $order_id = intval($_GET['order_id']);
     
@@ -46,7 +49,6 @@ if (isset($_GET['order_id'])) {
     exit();
 }
 
-// Get all orders for the user with item count
 $query = "SELECT 
             o.*,
             COUNT(oi.id) as item_count 

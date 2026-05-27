@@ -1,5 +1,6 @@
 <?php
 // Add debug logging
+//MCC\dashboard\fnb_menu.php
 error_log("fnb_menu.php loaded");
 error_log("Session user_id: " . ($_SESSION['user_id'] ?? 'not set'));
 ?>

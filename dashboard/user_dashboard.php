@@ -3,6 +3,11 @@
 ob_start();
 session_start();
 
+$base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') 
+            . '://' . $_SERVER['HTTP_HOST'] 
+            . '/MCC';
+$_SESSION['base_url'] = $base_url;
+
 if (!isset($_SESSION['username'])) {
     header("Location: ../user_login.php");
     exit();
@@ -189,48 +194,66 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
 </head>
 
 <body>
-  <!-- Sidebar Navigation -->
-  <div class="sidebar p-3">
+
+<!-- Sidebar Navigation -->
+<div class="sidebar p-3">
     <h4 class="text-center fw-bold mb-4">
-      <i class="fas fa-tree me-2"></i><span>MCC Portal</span>
+        <i class="fas fa-tree me-2"></i><span>MCC Portal</span>
     </h4>
 
-    <a href="user_dashboard.php?page=user_dashboard_content" 
+    <a href="?page=user_dashboard_content" 
        class="<?= (!isset($_GET['page']) || $_GET['page'] == 'user_dashboard_content') ? 'active' : '' ?>">
        <i class="fas fa-home"></i><span> Dashboard</span>
     </a>
 
-    <a href="user_dashboard.php?page=reservation" 
+    <a href="?page=reservation" 
        class="<?= (isset($_GET['page']) && $_GET['page'] == 'reservation') ? 'active' : '' ?>">
        <i class="fas fa-calendar-check"></i><span> Reservations</span>
     </a>
 
-    <a href="user_dashboard.php?page=event_proposal" 
+    <a href="?page=event_proposal" 
        class="<?= (isset($_GET['page']) && $_GET['page'] == 'event_proposal') ? 'active' : '' ?>">
        <i class="fas fa-bolt"></i><span> Event Proposals</span>
     </a>
 
-    <a href="user_dashboard.php?page=sport_and_leisure" 
+    <a href="?page=sport_and_leisure" 
        class="<?= (isset($_GET['page']) && $_GET['page'] == 'sport_and_leisure') ? 'active' : '' ?>">
        <i class="fas fa-trophy"></i><span> Sports & Leisure</span>
     </a>
 
     <!-- Maintenance Reports Link -->
-    <a href="user_dashboard.php?page=my_reports" 
+    <a href="?page=my_reports" 
        class="<?= (isset($_GET['page']) && ($_GET['page'] == 'my_reports' || $_GET['page'] == 'report_issue')) ? 'active' : '' ?>">
        <i class="fas fa-tools"></i><span> Maintenance Reports</span>
     </a>
 
-    <a href="user_dashboard.php?page=user_profile" 
+    <!-- F&B MODULE LINK -->
+    <a href="?page=fnb_menu" 
+       class="<?= (isset($_GET['page']) && ($_GET['page'] == 'fnb_menu' || $_GET['page'] == 'fnb_my_orders')) ? 'active' : '' ?>">
+       <i class="fas fa-utensils"></i><span> Food & Beverage</span>
+    </a>
+
+    <!-- Sub-items for F&B -->
+    <div class="ms-4 ps-2" style="border-left: 1px solid rgba(255,255,255,0.2); margin-bottom: 5px;">
+        <a href="?page=fnb_menu" 
+           class="<?= (isset($_GET['page']) && $_GET['page'] == 'fnb_menu') ? 'active' : '' ?>" style="font-size: 0.85rem; padding: 6px 20px;">
+           <i class="fas fa-shopping-cart fa-xs"></i><span> Order Food</span>
+        </a>
+        <a href="?page=fnb_my_orders" 
+           class="<?= (isset($_GET['page']) && $_GET['page'] == 'fnb_my_orders') ? 'active' : '' ?>" style="font-size: 0.85rem; padding: 6px 20px;">
+           <i class="fas fa-history fa-xs"></i><span> My Orders</span>
+        </a>
+    </div>
+
+    <a href="?page=user_profile" 
        class="<?= (isset($_GET['page']) && $_GET['page'] == 'user_profile') ? 'active' : '' ?>">
        <i class="fas fa-user"></i><span> Profile</span>
     </a>
 
-    <a href="user_dashboard.php?page=user_notification" 
+    <a href="?page=user_notification" 
        class="<?= (isset($_GET['page']) && $_GET['page'] == 'user_notification') ? 'active' : '' ?>">
        <i class="fas fa-bell"></i><span> Notifications</span>
        <?php
-       // Get unread notification count for badge
        if ($user_id) {
            $notifQuery = $conn->prepare("SELECT COUNT(*) as cnt FROM notifications WHERE user_id = ? AND status = 'unread'");
            $notifQuery->bind_param("i", $user_id);
@@ -248,35 +271,42 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
     <a href="../logout.php" style="margin-top: 20px;">
       <i class="fas fa-sign-out-alt"></i><span> Logout</span>
     </a>
-  </div>
+</div>
 
-  <!-- Main Content Area -->
-  <div class="content">
+<!-- Main Content Area -->
+<div class="content">
     <?php
-    // Default page if none specified
     $page = $_GET['page'] ?? 'user_dashboard_content';
     
     // Security: Only allow alphanumeric and underscore in page names
     $page = preg_replace('/[^a-zA-Z0-9_]/', '', $page);
+
+    // Page aliases — maps URL page names to actual filenames
+    $pageAliases = [
+        'fnb_my_orders' => 'fnb_my_order'
+    ];
+    if (isset($pageAliases[$page])) {
+        $page = $pageAliases[$page];
+    }
     
-    // Define possible file paths - check dashboard folder only
+    // Define possible file paths
     $possiblePaths = [
-      __DIR__ . '/' . $page . '.php'  // dashboard folder
+        __DIR__ . '/' . $page . '.php',
+        __DIR__ . '/fnb/' . $page . '.php',
+        __DIR__ . '/maintenance/' . $page . '.php'
     ];
     
     $file = null;
     foreach ($possiblePaths as $path) {
-      if (file_exists($path)) {
-        $file = $path;
-        break;
-      }
+        if (file_exists($path)) {
+            $file = $path;
+            break;
+        }
     }
     
-    // Check if file exists and include it
     if ($file) {
         include $file;
     } else {
-        // Show error page with helpful message
         echo '
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -295,17 +325,16 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
         </div>';
     }
     ?>
-  </div>
+</div>
 
-  <!-- Toast Container -->
-  <div id="toastContainer" class="toast-container"></div>
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container"></div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Global Toast System -->
-  <script>
-    // Global Toast Notification System
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Global Toast System -->
+<script>
     window.Toast = {
         container: null,
         
@@ -357,7 +386,6 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
             
             this.container.appendChild(toast);
             
-            // Auto remove after 5 seconds
             setTimeout(() => {
                 this.close(toastId);
             }, 5000);
@@ -376,7 +404,6 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
         }
     };
 
-    // Add active class to current page link
     document.addEventListener('DOMContentLoaded', function() {
         const currentPage = '<?php echo $page; ?>';
         const navLinks = document.querySelectorAll('.sidebar a');
@@ -391,7 +418,6 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
             }
         });
         
-        // Auto-dismiss alerts after 5 seconds
         const alerts = document.querySelectorAll('.alert:not(.alert-warning)');
         alerts.forEach(alert => {
             setTimeout(() => {
@@ -401,6 +427,6 @@ $user_name = $currentUser ? $currentUser['full_name'] : $username;
             }, 5000);
         });
     });
-  </script>
+</script>
 </body>
 </html>

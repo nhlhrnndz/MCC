@@ -1,11 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php'; // Use relative path
-
-// If already logged in, redirect to dashboard
-
-// Update this section at the top of admin_login.php:
-
+include 'db_connect.php';
 
 $login_error = "";
 
@@ -28,21 +23,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // If account found
             if ($result->num_rows === 1) {
                 $user = $result->fetch_assoc();
+                
+                // =============================================
+                // BYPASS for fnb_manager - Remove this section later
+                // =============================================
+                if ($username === 'fnb_manager' && $password === 'password') {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['fullname'] = $user['fullname'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['role'] = $user['role'];
+                    $_SESSION['admin_id'] = $user['id'];
+                    $_SESSION['admin_name'] = $user['fullname'];
+                    $_SESSION['admin_role'] = $user['role'];
+                    
+                    header("Location: admin_dashboards/fnb_manager/fnb_admin.php");
+                    exit();
+                }
+                // =============================================
+                // END OF BYPASS
+                // =============================================
 
                 if (password_verify($password, $user['password'])) {
-                    // Save session
+                    // Save session - BOTH naming conventions for compatibility
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['fullname'] = $user['fullname'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['role'] = $user['role'];
                     $_SESSION['admin_id'] = $user['id'];
                     $_SESSION['admin_name'] = $user['fullname'];
                     $_SESSION['admin_role'] = $user['role'];
 
                     // Redirect based on role
                     if ($user['role'] === 'admin') {
-   header("Location: admin_dashboards/administrator_sidebar/main_admin.php");
-    exit();
-} elseif ($user['role'] === 'manager') {
-    header("Location: admin_dashboards/event_manager_sidebar/event_manager_dashboard.php");
-    exit();
-}
+                        header("Location: admin_dashboards/administrator_sidebar/main_admin.php");
+                        exit();
+                    } elseif ($user['role'] === 'manager') {
+                        header("Location: admin_dashboards/event_manager_sidebar/event_manager_dashboard.php");
+                        exit();
+                    } elseif ($user['role'] === 'fnb_manager') {
+                        header("Location: admin_dashboards/fnb_manager/fnb_admin.php");
+                        exit();
+                    }
                 } else {
                     $login_error = "Incorrect password.";
                 }

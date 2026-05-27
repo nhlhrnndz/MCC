@@ -1,4 +1,5 @@
 <?php 
+// MCC/dashboard/user_dashboard_content.php
 if (!isset($_SESSION['username'])) {
   header("Location: user_login.php");
   exit();
